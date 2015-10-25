@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="04_Servlet">
+    <wb-module deploy-name="50_hw5_Struts">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/04_Servlet/build/classes"/>
-        <property name="context-root" value="04_Servlet"/>
+        <property name="java-output-path" value="/50_hw5_Struts/build/classes"/>
+        <property name="context-root" value="50_hw5_Struts"/>
     </wb-module>
 </project-modules>
