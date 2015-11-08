@@ -1,4 +1,4 @@
-package action.struts;
+package struts.action;
 
 import java.util.ResourceBundle;
 
