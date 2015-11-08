@@ -7,11 +7,11 @@
 </head>
 <body>
 	<div class="body">
-		<p class="title">Error</p>
+		<p class="title">#stext('name=error.title')</p>
 		<p class="content">
 			#sfielderror
 		</p>
-		<a href="../index.html">HOME</a>
+		<a href="../index.html">#stext('name=home')</a>
 	</div>
 </body>
 </html>

@@ -18,12 +18,13 @@ import spring.viewmodel.MessageModel;
 
 @Controller("Spring.HelloController")
 public class HelloController {
+	
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public ModelAndView hello(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring/controller/spring.xml");
 		
-		String HELLO = (String)context.getBean("HELLO");
-		return new ModelAndView("HELLO");
+		String HELLO = (String) context.getBean("HELLO");
+		return new ModelAndView(HELLO);
 	}
 	
 	@RequestMapping(value = "/doHello", method = RequestMethod.POST)
@@ -31,7 +32,7 @@ public class HelloController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring/controller/spring.xml");
 		
 		if(bindingResult.hasErrors()){
-			String ERROR = (String)context.getBean("ERROR");
+			String ERROR = (String) context.getBean("ERROR");
 			return new ModelAndView(ERROR, "ErrorModel", bindingResult.getFieldError());
 		}
 		

@@ -14,11 +14,11 @@
 	
 	<package name="05.1_Struts" extends="struts-default">
 	
-	<!--
-	<action name="doHello" class="action.struts.HelloAction" method="doHello">
+	<!-- 
+	<action name="doHello" class="struts.action.HelloAction" method="doHello">
 		<result name="success" type="velocity">struts/message.jsp</result>
 	</action>
-	-->
+	--> 
 	<!-- 
 	<action name="doHello" class="action.exception.HelloAction" method="doHello">
 		<result name="success" type="velocity">struts/message.jsp</result>
@@ -33,14 +33,14 @@
 	-->
  
 		<action name="hello">
-			<result type="velocity">struts/intlhello.jsp</result>
+			<result type="velocity">struts/hello.jsp</result>
 		</action>
 	
-		<action name="doHello" class="action.intl.HelloAction" method="doHello">
-			<result name="success" type="velocity">struts/intlmessage.jsp</result>
-			<result name="input" type="velocity">struts/intlerror.jsp</result>
+		<action name="doHello" class="struts.action.HelloAction" method="doHello">
+			<result name="success" type="velocity">struts/message.jsp</result>
+			<result name="input" type="velocity">struts/error.jsp</result>
 		</action>
-	
+
 		<!--
 		<action name="hello">
 			<result type="velocity">struts/intlhellocss.jsp</result>

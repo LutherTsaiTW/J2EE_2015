@@ -7,17 +7,17 @@
 
 <body>
 	<div class="body">
-		<p class="title">Hello</p>
+		<p class="title">#springMessage("hello.title")</p>
 
 		<form action="doHello" method="POST">
 			<p class="content">
-				What's your name 
+				#springMessage("hello.question")
 				<input type="text" name="name" size="10"/> 
 				<input type="submit" value="?" class="QuestionMark" />
 			</p>
 		</form>
 
-		<a href="#springMessage("homeURL")">home</a>
+		<a href="#springMessage("homeURL")">#springMessage("home")</a>
 	</div>
 
 </body>

@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div class="body">
-		<p class="title">Message</p>
+		<p class="title">#stext('name=message.title')</p>
 		
 		<p class="message">
 			$helloForm.result
@@ -16,7 +16,7 @@
 			$helloForm.stamp
 		</p>
 		
-		<a href="../index.html">HOME</a>
+		<a href="../index.html">#stext('name=home')</a>
 	</div>
 </body>
 </html>
