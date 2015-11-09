@@ -1,7 +1,6 @@
 package spring.viewmodel;
 
 import javax.validation.constraints.Pattern;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class HelloModel {

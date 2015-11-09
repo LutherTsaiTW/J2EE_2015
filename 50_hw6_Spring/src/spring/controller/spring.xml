@@ -12,20 +12,20 @@
 	<bean id="messageModel" class="spring.viewmodel.MessageModel" />
 	
 	<bean id="HELLO" class="java.lang.String">
-		<constructor-arg type="String" value="spring/hello"/>
-    	<!-- <constructor-arg type="String" value="spring/intl/intlhello"/> -->
+		<!-- <constructor-arg type="String" value="spring/hello"/> -->
+    	<constructor-arg type="String" value="spring/intl/intlhello"/>
     	<!-- <constructor-arg type="String" value="spring/intl/css/intlhellocss"/> -->
     </bean>
     
     <bean id="SUCCESS" class="java.lang.String">
-    	<constructor-arg type="String" value="spring/message"/>
-    	<!-- <constructor-arg type="String" value="spring/intl/intlmessage"/> -->
+    	<!--<constructor-arg type="String" value="spring/message"/>-->
+    	<constructor-arg type="String" value="spring/intl/intlmessage"/> 
     	<!-- <constructor-arg type="String" value="spring/intl/css/intlmessagecss"/> -->
     </bean>
     
     <bean id="ERROR" class="java.lang.String">
-    	<constructor-arg type="String" value="spring/error"/>
-    	<!-- <constructor-arg type="String" value="spring/intl/intlerror"/> -->
+    	<!-- <constructor-arg type="String" value="spring/error"/> -->
+    	<constructor-arg type="String" value="spring/intl/intlerror"/>
     	<!-- <constructor-arg type="String" value="spring/intl/css/intlerrorcss"/> -->
     </bean>
     
