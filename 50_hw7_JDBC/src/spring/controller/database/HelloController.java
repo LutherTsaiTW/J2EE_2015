@@ -53,9 +53,6 @@ public class HelloController {
 		Message msg = (Message) context.getBean("message");
 		String result = msg.doMessage(helloModel.getName());
 		
-		Mail mail = (Mail) context.getBean("mail");
-		String stamp = mail.sendMail(result);
-		
 		Fee fee = (Fee) context.getBean("fee");
 		FeeModel feeModel = new FeeModel();
 		feeModel.setName(helloModel.getName());
@@ -83,6 +80,10 @@ public class HelloController {
 			feeErrors.add(new FieldError("HelloController", "error.database", res.getString("error.database")+"<br>"+e.getMessage()));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}
+		
+		Mail mail = (Mail) context.getBean("mail");
+		String mailMsg = result + "\n" + "NT$ => " + Integer.toString(count);;
+		String stamp = mail.sendMail(mailMsg);
 		
 		MessageModel msgModel = (MessageModel) context.getBean("messageModel");
 		msgModel.setResult(result);

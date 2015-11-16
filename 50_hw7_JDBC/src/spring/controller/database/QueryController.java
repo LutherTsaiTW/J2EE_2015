@@ -49,11 +49,9 @@ public class QueryController {
 		Fee fee = (Fee) context.getBean("fee");
 		FeeModel feeModel = new FeeModel();
 		feeModel.setName(helloModel.getName());
-		int count;
 		
 		try {
 			feeModel = fee.find(feeModel);
-			count = feeModel.getCount();
 		} catch (NullAccountException nullAccountException) {
 			feeErrors.add(new FieldError("QueryController", nullAccountException.getMessage(), res.getString(nullAccountException.getMessage())));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
