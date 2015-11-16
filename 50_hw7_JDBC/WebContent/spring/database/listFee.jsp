@@ -14,7 +14,7 @@
 				<tr>
 					<th>ID</th>
 					<th>NAME</th>
-					<th>COUNT></th>
+					<th>COUNT</th>
 				</tr>
 				#foreach( $feeModel in $FeeListModel )
 				<tr>

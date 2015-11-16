@@ -30,7 +30,7 @@ public class ListController {
 	String ERROR = (String)context.getBean("ERROR");
 	ResourceBundle res = ResourceBundle.getBundle("resources.MessageDictionary");
 	
-	@RequestMapping(value = "/doList", method = RequestMethod.POST)
+	@RequestMapping(value = "/doList", method = RequestMethod.GET)
 	public ModelAndView doList() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring/controller/database/spring.xml");
 		List<FieldError> feeErrors = new ArrayList<FieldError>();
