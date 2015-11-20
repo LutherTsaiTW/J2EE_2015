@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import exceptions.FeeBeenPaidException;
 import exceptions.NullAccountException;
 import service.fee.Fee;
 import viewmodel.HelloModel;
@@ -58,13 +59,16 @@ public class PayController {
 			if (count > 0) {
 				feeModel.setCount(0);
 				fee.update(feeModel);
+				feeModel.setCount(count);
+			} else if (count == 0) {
+				throw new FeeBeenPaidException();
 			}
-			
-		} catch (NullAccountException nullAccountException) {
-			feeErrors.add(new FieldError("PayController", nullAccountException.getMessage(), res.getString(nullAccountException.getMessage())));
+		} catch (NullAccountException | FeeBeenPaidException e) {
+			feeErrors.add(new FieldError("PayController", e.getMessage(), res.getString(e.getMessage())));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		} catch (Exception e) {
-			// TODO: handle exception
+			feeErrors.add(new FieldError("PayController", "error.database", res.getString("error.database")+"<br>"+e.getMessage()));
+			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}
 		
 		String SUCCESS = (String)context.getBean("paySUCCESS");
