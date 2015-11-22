@@ -41,7 +41,7 @@ public class LikeController {
 		
 		if(bindingResult.hasErrors()){
 			feeErrors.add(bindingResult.getFieldError());
-			return new ModelAndView(ERROR, "ErrorModel", bindingResult.getFieldError());
+			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}
 		
 		Account fee = (Account) context.getBean("account");

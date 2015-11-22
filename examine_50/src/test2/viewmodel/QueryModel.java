@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class QueryModel {
 
-	@NotEmpty(message="{error.carEmpty}")
+	@NotEmpty(message="{error.nameEmpty}")
 	@Pattern(regexp="[a-zA-Z\u4E00-\u9FFF]+", message="{error.charOnly}")
 	private String name;
 	
