@@ -67,10 +67,10 @@ public class RetailController {
 				}
 			}
 		} catch (NullAccountException nullAccountException) {
-			feeErrors.add(new FieldError("QueryController", nullAccountException.getMessage(), res.getString(nullAccountException.getMessage())));
+			feeErrors.add(new FieldError("RetailController", nullAccountException.getMessage(), res.getString(nullAccountException.getMessage())));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		} catch (Exception e) {
-			feeErrors.add(new FieldError("InsertController", "error.database", res.getString("error.database")+"<br>"+e.getMessage()));
+			feeErrors.add(new FieldError("RetailController", "error.database", res.getString("error.database")+"<br>"+e.getMessage()));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}
 		

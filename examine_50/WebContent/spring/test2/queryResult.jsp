@@ -9,12 +9,12 @@
 <body>
 	<div class="body">
 	
-			<p class="title">#springMessage("query.title")</p>
+			<p class="title">#springMessage("query.likeTitle")</p>
 			
 			<p class="content">	
-			#springMessage("query.carType") = $MessageModel.result
+			#springMessage("query.name") = $MessageModel.result
 			<br><br>
-			#springMessage("query.carAmount") = $MessageModel.count
+			#springMessage("query.amount") = $MessageModel.count
 			<br><br> 
 			</p>
 			

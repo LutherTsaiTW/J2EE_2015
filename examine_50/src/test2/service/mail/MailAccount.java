@@ -1,4 +1,4 @@
-package test1.service.mail;
+package test2.service.mail;
 
 public interface MailAccount {
 	// mail server
