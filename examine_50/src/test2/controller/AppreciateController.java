@@ -42,7 +42,9 @@ public class AppreciateController {
 		List<FieldError> feeErrors = new ArrayList<FieldError>();
 		
 		if(bindingResult.hasErrors()){
-			feeErrors.add(bindingResult.getFieldError());
+			for (FieldError err : bindingResult.getFieldErrors()) {
+				feeErrors.add(err);
+			}
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}
 		

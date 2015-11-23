@@ -43,7 +43,7 @@ public class QuitController {
 		List<FieldError> feeErrors = new ArrayList<FieldError>();
 		
 		if(bindingResult.hasErrors()){
-			return new ModelAndView(ERROR, "ErrorModel", bindingResult.getFieldError());
+			return new ModelAndView(ERROR, "ErrorModel", bindingResult.getFieldErrors());
 		}
 		
 		String userName = helloModel.getName();

@@ -43,7 +43,7 @@ public class QueryController {
 		List<FieldError> feeErrors = new ArrayList<FieldError>();
 		
 		if(bindingResult.hasErrors()){
-			return new ModelAndView(ERROR, "ErrorModel", bindingResult.getFieldError());
+			return new ModelAndView(ERROR, "ErrorModel", bindingResult.getFieldErrors());
 		}
 		
 		Fee fee = (Fee) context.getBean("fee");

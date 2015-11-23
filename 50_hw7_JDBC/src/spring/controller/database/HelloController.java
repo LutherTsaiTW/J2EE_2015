@@ -47,7 +47,10 @@ public class HelloController {
 		List<FieldError> feeErrors = new ArrayList<FieldError>();
 		
 		if(bindingResult.hasErrors()){
-			return new ModelAndView(ERROR, "ErrorModel", bindingResult.getFieldError());
+			for (FieldError err : bindingResult.getFieldErrors()) {
+				feeErrors.add(err);
+			}
+			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}
 		
 		Message msg = (Message) context.getBean("message");

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import test1.viewmodel.QueryModel;
+import test2.viewmodel.QueryModel;
 import test2.exceptions.NullAccountException;
 import test2.model.AccountModel;
 import test2.service.account.Account;
@@ -40,7 +40,9 @@ public class LikeController {
 		List<FieldError> feeErrors = new ArrayList<FieldError>();
 		
 		if(bindingResult.hasErrors()){
-			feeErrors.add(bindingResult.getFieldError());
+			for (FieldError err : bindingResult.getFieldErrors()) {
+				feeErrors.add(err);
+			}
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}
 		

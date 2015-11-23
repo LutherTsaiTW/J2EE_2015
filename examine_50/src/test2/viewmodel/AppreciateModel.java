@@ -5,11 +5,11 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class AppreciateModel {
-	@NotEmpty(message="{error.customerEmpty}")
+	@NotEmpty(message="{error.nameEmpty}")
 	@Pattern(regexp="[a-zA-Z\u4E00-\u9FFF]+", message="{error.charOnly}")
 	private String accountName;
 	
-	@NotEmpty(message="{error.carEmpty}")
+	@NotEmpty(message="{error.amountEmpty}")
 	@Pattern(regexp="[0-9]+", message="{error.numericOnly}")
 	private String appreaciateAmount;
 	
