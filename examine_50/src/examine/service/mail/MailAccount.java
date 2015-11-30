@@ -11,7 +11,5 @@ public interface MailAccount {
 
 	// mail
 	public static final String sender = "javakingntut@gmail.com";
-	//public static final String reciver = "Luther0429@gmail.com";
-	public static String reciver = "ntut.java.ta2@gmail.com";
-	public static final String subject = "Java Test Mail";
+	public static final String subject = "SELL/BUY RECEIPT";
 }

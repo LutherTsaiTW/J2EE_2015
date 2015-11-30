@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import examine.exceptions.NotEnoughMoneyException;
+import examine.exceptions.NotEnoughTransferFee;
 import examine.model.AccountModel;
 import examine.model.CarModel;
 import examine.service.account.Account;
@@ -65,9 +66,9 @@ public class SellCarController {
 				account.update(accountModel);
 			}
 			else {
-				throw new NotEnoughMoneyException();
+				throw new NotEnoughTransferFee();
 			}
-		} catch (NotEnoughMoneyException e) {
+		} catch (NotEnoughTransferFee e) {
 			feeErrors.add(new FieldError("SellCarController", e.getMessage(), res.getString(e.getMessage())));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		} catch (Exception e) {

@@ -13,7 +13,7 @@
 			<table border="1px" cellspacing="0px" cellpadding="6px" valign="middle">
 				<tr>
 					<th>買家姓名</th>
-					<th>$BuyCarModel.ownerId</th>
+					<th>$BuyCarModel.ownerName</th>
 				</tr>
 				<tr>
 					<th>汽車名稱</th>

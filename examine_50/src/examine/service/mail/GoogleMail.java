@@ -34,7 +34,7 @@ public class GoogleMail implements Mail, MailAccount {
 		mailSession.setDebug(false);
 	}
 
-	public String sendMail(String message) {
+	public String sendMail(String message, String reciver) {
 
 		String stamp = null;
 

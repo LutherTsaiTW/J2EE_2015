@@ -45,8 +45,8 @@
 		<constructor-arg type="String" value="spring/examine/buyCar"/>
     </bean>
     
-    <bean id="bidSUCCESS" class="java.lang.String">
-		<constructor-arg type="String" value="spring/examine/GarageDetail"/>
+    <bean id="buySUCCESS" class="java.lang.String">
+		<constructor-arg type="String" value="spring/examine/buyCarResult"/>
     </bean>
     
     <bean id="dealerList" class="java.lang.String">

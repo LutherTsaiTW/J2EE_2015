@@ -15,17 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import examine.service.mail.Mail;
 import examine.exceptions.CannotBidOwnCar;
 import examine.exceptions.LowerThanPriceException;
 import examine.exceptions.NotEnoughMoneyException;
 import examine.exceptions.NullAccountException;
+import examine.exceptions.NullCarException;
 import examine.model.AccountModel;
 import examine.model.CarModel;
 import examine.service.account.Account;
 import examine.service.car.Car;
 import examine.viewmodel.BidCarModel;
 import examine.viewmodel.BuyCarModel;
-import examine.viewmodel.GarageModel;
 
 @Controller("examine.controller.BidCarController")
 
@@ -64,23 +65,36 @@ public class BidCarController {
 				throw new CannotBidOwnCar();
 			} 
 			else {
-				AccountModel dealerAccountModel = new AccountModel();
-				dealerAccountModel.setId(carModel.getOwnerId());
-				dealerAccountModel = account.find(dealerAccountModel);
-				
-				int rest = dealerAccountModel.getCash() + carModel.getPrice();
-				
-				dealerAccountModel.setCash(rest);
-				account.update(dealerAccountModel);
-				
-				carModel.setOwnerId(accountModel.getId());
-				car.update(carModel);
-				
-				rest = accountModel.getCash() - carModel.getPrice();
-				accountModel.setCash(rest);
-				account.update(accountModel);
+				if (accountModel.getCash() < carModel.getPrice()) {
+					throw new NotEnoughMoneyException();
+				}
+				else {
+					AccountModel dealerAccountModel = new AccountModel();
+					dealerAccountModel.setId(carModel.getOwnerId());
+					dealerAccountModel = account.find(dealerAccountModel);
+					
+					int rest = dealerAccountModel.getCash() + carModel.getPrice();
+					
+					dealerAccountModel.setCash(rest);
+					account.update(dealerAccountModel);
+					
+					carModel.setOwnerId(accountModel.getId());
+					car.update(carModel);
+					car.delete(carModel);
+					
+					rest = accountModel.getCash() - carModel.getPrice();
+					accountModel.setCash(rest);
+					account.update(accountModel);
+					
+					Mail mail = (Mail) context.getBean("mail");
+					String mailMsg = "親愛的車主，恭喜購得車輛，車款已從帳戶扣除，祝行車平安！ JAVA車市敬上";
+					mail.sendMail(mailMsg, accountModel.getEmail());
+					
+					mailMsg = "親愛的車主，您的車款已順利售出，車款已匯入帳戶，敬請查收！ JAVA車市敬上";
+					mail.sendMail(mailMsg, dealerAccountModel.getEmail());
+				}
 			}
-		} catch (CannotBidOwnCar | NotEnoughMoneyException | LowerThanPriceException e) {
+		} catch (CannotBidOwnCar | NotEnoughMoneyException | NullAccountException | NullCarException e) {
 			feeErrors.add(new FieldError("BidCarController", e.getMessage(), res.getString(e.getMessage())));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		} catch (Exception e) {
