@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<bean id="DataSource" class="java.lang.String">
+		<constructor-arg type="String" value="java:comp/env/datasource/JavaSQLTestDS"/> 
+    </bean>
+	
+	<bean id="account" class="test3.service.account.HibernateAccount" scope="prototype"/>
+	<bean id="car" class="test3.service.car.HibernateCar" scope="prototype"/>
+	
+	<bean id="mail" class="test3.service.mail.GoogleMail" />
+
+	<bean id="messageModel" class="test3.viewmodel.MessageModel" />
+	<bean id="accountModel" class="test3.model.AccountModel" />
+
+	<bean id="carList" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/carList"/>
+    </bean>
+    
+    <bean id="ACCOUNT" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/queryAccount"/>
+    </bean>
+    
+    <bean id="accountSUCCESS" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/AccountDetail"/>
+    </bean>
+    
+    <bean id="GARAGE" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/queryGarage"/>
+    </bean>
+    
+    <bean id="garageSUCCESS" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/GarageDetail"/>
+    </bean>
+    
+    <bean id="BUILD" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/buildCar"/>
+    </bean>
+    
+    <bean id="buildSUCCESS" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/GarageDetail"/>
+    </bean>
+    
+    <bean id="BID" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/bidCar"/>
+    </bean>
+    
+    <bean id="bidSUCCESS" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/GarageDetail"/>
+    </bean>
+    
+    <bean id="dealerList" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/DealerList"/>
+    </bean>
+
+    <bean id="ERROR" class="java.lang.String">
+		<constructor-arg type="String" value="spring/test3/error"/>
+    </bean>
+
+</beans>

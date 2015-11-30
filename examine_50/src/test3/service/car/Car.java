@@ -1,13 +1,14 @@
-package test1.service.car;
+package test3.service.car;
 
 import java.util.List;
 
-import test1.model.CarModel;
+import test3.model.CarModel;
 
 public interface Car {
-	void create(CarModel feeModel) throws Exception;
-	void update(CarModel feeModel) throws Exception;
-	void delete(CarModel feeModel) throws Exception;
-	CarModel find(CarModel feeModel) throws Exception;
+	void create(CarModel carModel) throws Exception;
+	void update(CarModel carModel) throws Exception;
+	void delete(CarModel carModel) throws Exception;
+	CarModel find(CarModel carModel) throws Exception;
 	List<CarModel> list() throws Exception;
+	List<CarModel> personalList(CarModel carModel) throws Exception;
 }

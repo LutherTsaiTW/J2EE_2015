@@ -18,9 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import test1.service.mail.Mail;
 import test1.exception.NullAccountException;
 import test1.model.CarModel;
-import test1.service.car.Car;
 import test1.viewmodel.MessageModel;
 import test1.viewmodel.SellCarModel;
+import test1.service.car.Car;
 
 @Controller("test1.controller.RetailController")
 

@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.validation.Valid;
 
 import model.FeeModel;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +30,6 @@ public class ListController {
 	
 	@RequestMapping(value = "/doList", method = RequestMethod.GET)
 	public ModelAndView doList() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring/controller/database/spring.xml");
 		List<FieldError> feeErrors = new ArrayList<FieldError>();
 		List<FeeModel> feeListModel;
 		Fee fee = (Fee) context.getBean("fee");
@@ -43,7 +40,7 @@ public class ListController {
 				throw new NullListException();
 			}
 		} catch (NullAccountException e) {
-			feeErrors.add(new FieldError("QueryController", e.getMessage(), res.getString(e.getMessage())));
+			feeErrors.add(new FieldError("ListController", e.getMessage(), res.getString(e.getMessage())));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		} catch (Exception e) {
 			feeErrors.add(new FieldError("ListController", "error.database", res.getString("error.database")+"<br>"+e.getMessage()));

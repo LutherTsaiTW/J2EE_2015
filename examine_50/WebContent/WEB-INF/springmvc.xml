@@ -11,7 +11,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 	
 	<mvc:annotation-driven validator="validator"/>
 
-	<context:component-scan base-package="test1.*, test2.*" />
+	<context:component-scan base-package="test1.*, test2.*, test3.*, examine.*" />
 	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
        <property name="validationMessageSource" ref="messageSource"/> 
@@ -19,7 +19,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 			<property name="defaultEncoding" value="UTF8"/>
-			<property name="basenames" value="classpath:test1/resources/MessageDictionary,classpath:test2/resources/MessageDictionary" />
+			<property name="basenames" value="classpath:test1/resources/MessageDictionary,classpath:test2/resources/MessageDictionary,classpath:test3/resources/MessageDictionary,classpath:examine/resources/MessageDictionary" />
 	</bean>	
 
 	<bean id="velocityConfigurer"	class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">

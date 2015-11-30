@@ -14,7 +14,8 @@
 
 	<bean id="mail" class="service.mail.GoogleMail" />
 	
-	<bean id="fee" class="service.fee.JDBCFee" scope="prototype"/>
+	<!-- <bean id="fee" class="service.fee.JDBCFee" scope="prototype"/>  -->
+	<bean id="fee" class="service.fee.HibernateFee" scope="prototype"/>
 
 	<bean id="messageModel" class="viewmodel.MessageModel" />
 	<bean id="feeModel" class="model.FeeModel" />

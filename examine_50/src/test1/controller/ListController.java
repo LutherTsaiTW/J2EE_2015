@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import test1.service.car.Car;
 import test1.exception.NullListException;
+import test1.service.car.Car;
 
 @Controller("test1.controller.ListController")
 
