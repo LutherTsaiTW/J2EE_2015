@@ -11,8 +11,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 	
 	<mvc:annotation-driven validator="validator"/>
 
-	<context:component-scan base-package="spring.*" />
-	<context:component-scan base-package="webservice.*" />
+	<context:component-scan base-package="controller.*" />
+	<context:component-scan base-package="restfulWS.*" />
 	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
        <property name="validationMessageSource" ref="messageSource"/> 

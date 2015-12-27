@@ -3,7 +3,7 @@
 <head>
 	<title>Message Fee</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/00_hw10_WebService/css/web.css" type="text/css">
+<link rel="stylesheet" href="../../css/web.css" type="text/css">
 </head>
 
 <body>
@@ -12,11 +12,11 @@
 			<p class="title">Message Fee</p>
 			
 			<p class="content">	
-			$MessageProviderModel.MessageModel.result (by Java$MessageProviderModel.messageProvider)
+			$MessageProviderModel.MessageModel.result <font size="3">(by Java$MessageProviderModel.messageProvider)</font>
 			<br><br>
-			$MessageProviderModel.MessageModel.stamp (by Java$MessageProviderModel.mailProvider)
+			$MessageProviderModel.MessageModel.stamp <font size="3">(by Java$MessageProviderModel.mailProvider)</font>
 			<br><br> 
-			Fee = NT$ $MessageProviderModel.MessageModel.count (by Java$MessageProviderModel.feeProvider)
+			Fee = NT$ $MessageProviderModel.MessageModel.count <font size="3">(by Java$MessageProviderModel.feeProvider)</font>
 			</p>
 			
 		<a href="#springMessage("homeURL")">home</a>

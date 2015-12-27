@@ -1,4 +1,4 @@
-package exceptions;
+package restfulWS.fee.exceptions;
 
 public class NullAccountException extends Exception {
 	

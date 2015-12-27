@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/00_hw10_WebService/css/web.css" type="text/css">
+<link rel="stylesheet" href="../../css/web.css" type="text/css">
 <title>Quit Fee</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
 		<p class="content">
 			Account $FeeProviderModel.feeModel.name has been deleted
 			<br>
-			(by Java$FeeProviderModel.feeProvider)
+			<font size="3">(by Java$FeeProviderModel.feeProvider)</font>
 		</p>
 
 		<a href="#springMessage("homeURL")">home</a>

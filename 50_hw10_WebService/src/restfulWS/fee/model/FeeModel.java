@@ -1,4 +1,4 @@
-package model;
+package restfulWS.fee.model;
 
 public class FeeModel{
 	private int id;
