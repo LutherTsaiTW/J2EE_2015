@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+  "http://www.hibernate.org/dtd/hibernate-mapping.dtd">
+
+<hibernate-mapping>
+
+	<class name="model.AdModel" table="MULTI_AD">
+		<!-- 使用資料庫自建之主鍵值 -->
+		<id name="AdID" column="AdID" type="integer">
+			<generator class="native" />
+		</id>
+
+		<property name="adOwnerToken" column="adOwnerToken" type="string"
+			not-null="true" length="255" />
+
+		<property name="adTitle" column="adTitle" type="string"
+			not-null="true" length="255" />
+
+		<property name="adDes" column="adDes" type="string" not-null="true"
+			length="255" />
+
+		<property name="adImageLink" column="adImageLink" type="string"
+			not-null="true" length="255" />
+
+		<property name="adRef" column="adRef" not-null="true" type="string"
+			length="255" />
+
+		<property name="adStartDate" column="adStartDate" type="integer"
+			not-null="true" length="10" />
+
+		<property name="adEndDate" column="adEndDate" type="integer"
+			not-null="true" length="10" />
+
+		<property name="adImageHeight" column="adImageHeight" type="integer"
+			not-null="true" length="10" />
+
+		<property name="adImageWidth" column="adImageWidth" type="integer"
+			not-null="true" length="10" />
+
+		<property name="adClick" column="adClick" type="integer"
+			not-null="true" length="10" />
+
+	</class>
+
+</hibernate-mapping>

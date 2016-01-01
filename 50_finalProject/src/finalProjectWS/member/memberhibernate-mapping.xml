@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+  "http://www.hibernate.org/dtd/hibernate-mapping.dtd">
+
+<hibernate-mapping>
+
+	<class name="model.MemberModel" table="MULTI_MEMBER">
+		<!-- 使用資料庫自建之主鍵值 -->
+		<id name="memberID" column="memberID" type="integer">
+			<generator class="native" />
+		</id>
+
+		<property name="name" column="name" type="string" not-null="true"
+			length="255" />
+
+		<property name="email" column="email" type="string" not-null="true"
+			length="255" />
+
+		<property name="account" column="account" type="string"
+			not-null="true" length="255" />
+
+		<property name="password" column="password" type="string"
+			not-null="true" length="255" />
+
+		<property name="applicationToken" column="applicationToken"
+			not-null="true" type="string" length="255" />
+
+		<property name="previlege" column="previlege" type="integer"
+			not-null="true" length="10" />
+
+		<property name="adIncomeFee" column="adIncomeFee" type="integer"
+			not-null="true" length="10" />
+
+		<property name="adPaymentFee" column="adPaymentFee" type="integer"
+			not-null="true" length="10" />
+
+	</class>
+
+</hibernate-mapping>

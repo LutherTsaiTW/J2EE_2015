@@ -3,6 +3,9 @@
  */
 
 function uploadImage() {
+	var bar = $('.bar');
+	var percent = $('.percent');
+	
 	var file = document.querySelector('input[type=file]').files[0];
 	
 	if (file) {
@@ -22,6 +25,28 @@ function uploadImage() {
     		  var imgEncoded = encoded.replace("data:image/png;base64,", "");
     	  }
     	  $.ajax({ 
+    		  	xhr: function() {
+    			    var xhr = new window.XMLHttpRequest();
+
+    			    xhr.upload.addEventListener("progress", function(evt) {
+    			      if (evt.lengthComputable) {
+    			        var percentComplete = evt.loaded / evt.total;
+    			        percentComplete = parseInt(percentComplete * 100);
+    			        var percentVal = percentComplete + '%';
+        		        bar.width(percentVal);
+        		        percent.html(percentVal);
+    			        //console.log(percentComplete);
+    			        if (percentComplete === 100) {
+    			        	var percentVal = '100%';
+    	    		        bar.width(percentVal);
+    	    		        percent.html(percentVal);
+    			        }
+
+    			      }
+    			    }, false);
+
+    			    return xhr;
+    			  },
     		    url: 'https://api.imgur.com/3/image',
     		    headers: {
     		        'Authorization': 'Client-ID 9a8594613d16dd6'
@@ -31,7 +56,11 @@ function uploadImage() {
     		        'image': imgEncoded
     		    },
     		    success: function(data) { 
-    		    	console.log(data.data.link); 
+    		    	$('#ImageRef').val(data.data.link);
+    		    	$('#ImageWidth').val(data.data.width);
+    		    	$('#ImageHeight').val(data.data.height);
+    		    	document.getElementById("ImageRefValue").innerHTML = data.data.link;
+    		    	console.log(data.data); 
     		    }
     		});
 	  }
