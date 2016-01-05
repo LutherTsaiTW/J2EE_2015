@@ -26,6 +26,12 @@
 		<property name="applicationToken" column="applicationToken"
 			not-null="true" type="string" length="255" />
 
+		<property name="bankToken" column="bankToken"
+			not-null="true" type="string" length="255" />
+
+		<property name="bankAccount" column="bankAccount" type="integer"
+			not-null="true" length="10" />
+
 		<property name="previlege" column="previlege" type="integer"
 			not-null="true" length="10" />
 

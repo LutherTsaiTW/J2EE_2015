@@ -5,6 +5,34 @@
     <meta charset="UTF-8">
     <title>帳號註冊</title>
     <style>
+    .pageHeader {
+        width: 100%;
+        height: 80px;
+        float: left;
+    }
+    
+    .pageLogo {
+        height: 100%;
+        float: left;
+    }
+    
+    .pageHeaderButton {
+        width: 80px;
+        height: 30px;
+        float: right;
+        border-radius: 5px;
+        margin: 20px;
+        font-size: 15px;
+    }
+    
+    .pageTitle {
+        width: 100%;
+        height: 30px;
+        float: left;
+        border-radius: 5px;
+        text-align: center;
+    }
+    
     .title {
         text-align: center;
         font-size: 25px
@@ -25,11 +53,31 @@
         border-radius: 5px;
         width: 300px;
     }
+    
+    .loginButton {
+		width: 80px;
+		height: 100%;
+		border-radius: 5px;
+		font-size: 15px;
+	}
+	
+    .loginButtonSection {
+		float:center;
+		width: 100%;
+		height: 30px;
+		text-align:center;
+	}
     </style>
 </head>
 
 <body>
-    <p class="title">帳號註冊</p>
+    <div class="pageHeader">
+        <img class="pageLogo" src="../img/50_MULTI_b.png">
+        <button class="pageHeaderButton" type="button" onclick="javascript:location.href='../index.html'">登入系統</button>
+    </div>
+    <div class="pageTitle">
+        <font class="title">註冊帳號</font>
+    </div>
     <div class="register">
         <form action="">
             <div style="text-align: center;">
@@ -50,9 +98,9 @@
                 <br>
                 <br>
             </div>
-            <div style="text-align: center;">
-                <input type="submit" id="submit" name="submit" value="註冊">
-            </div>
+            <div class="loginButtonSection">
+				<input class="loginButton" type="submit" name="submit" value="註冊">
+			</div>
         </form>
     </div>
 </body>

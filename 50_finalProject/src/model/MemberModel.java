@@ -7,6 +7,8 @@ public class MemberModel {
 	private String account;
 	private String password;
 	private String applicationToken;
+	private String bankToken;
+	private int bankAccount;
 	private int previlege;
 	private int adIncomeFee;
 	private int adPaymentFee;
@@ -81,6 +83,22 @@ public class MemberModel {
 
 	public void setAdPaymentFee(int adPaymentFee) {
 		this.adPaymentFee = adPaymentFee;
+	}
+
+	public int getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(int bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
+	public String getBankToken() {
+		return bankToken;
+	}
+
+	public void setBankToken(String bankToken) {
+		this.bankToken = bankToken;
 	}
 
 }
