@@ -8,6 +8,7 @@ public class MemberModel {
 	private String password;
 	private String applicationToken;
 	private String bankToken;
+	private String session;
 	private int bankAccount;
 	private int previlege;
 	private int adIncomeFee;
@@ -99,6 +100,14 @@ public class MemberModel {
 
 	public void setBankToken(String bankToken) {
 		this.bankToken = bankToken;
+	}
+
+	public String getSession() {
+		return session;
+	}
+
+	public void setSession(String session) {
+		this.session = session;
 	}
 
 }

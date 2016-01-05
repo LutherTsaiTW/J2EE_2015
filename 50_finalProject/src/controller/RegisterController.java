@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.Spring;
 import javax.validation.Valid;
 
+import model.BanktokenModel;
 import model.MemberModel;
 
 import org.springframework.context.ApplicationContext;
@@ -50,69 +50,80 @@ public class RegisterController {
 		}
 		
 		String member_system = (String) context.getBean("member_system");
+		String bank_system = (String) context.getBean("bank_system");
 		
 		MemberModel memberModel = new MemberModel();
-		memberModel.setAccount(registerPageModel.getAccount());
-		memberModel.setName(registerPageModel.getName());
-		memberModel.setEmail(registerPageModel.getEmail());
-		
-	    MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("MD5");
-			md.update(registerPageModel.getPassword().getBytes());
-			byte[] digest = md.digest();
-			StringBuffer sb = new StringBuffer();
-			for (byte b : digest) {
-				sb.append(String.format("%02x", b & 0xff));
-			}
-			memberModel.setPassword(sb.toString());
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			md = MessageDigest.getInstance("MD5");
-			String token = registerPageModel.getPassword() + registerPageModel.getAccount();
-			md.update(token.getBytes());
-			byte[] digest = md.digest();
-			StringBuffer sb = new StringBuffer();
-			for (byte b : digest) {
-				sb.append(String.format("%02x", b & 0xff));
-			}
-			memberModel.setApplicationToken(sb.toString());
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		
-		memberModel.setAdIncomeFee(0);
-		memberModel.setAdPaymentFee(0);
-		memberModel.setPrevilege(111);
 		
 		
 		try {
 			try{
-				StringBuilder getURL = new StringBuilder(member_system).append("/findByName?name=").append(registerPageModel.getAccount());
+				StringBuilder getURL = new StringBuilder(member_system).append("/findByAccount?account=").append(registerPageModel.getAccount());
 				memberModel = restTemplate.getForObject(getURL.toString(), MemberModel.class);
 				throw new AccountAlreadyExists();
 			}catch (AccountAlreadyExists e) {
-				feeErrors.add(new FieldError("CarListController", e.getMessage(), resource.getString(e.getMessage())));
+				feeErrors.add(new FieldError("RegisterController", e.getMessage(), resource.getString(e.getMessage())));
 				return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 			}catch (RestClientException restClientException){	
 				String statusCode = restClientException.getMessage();
 				if(statusCode.equals("404 Not Found")){
+					memberModel.setAccount(registerPageModel.getAccount());
+					memberModel.setName(registerPageModel.getName());
+					memberModel.setEmail(registerPageModel.getEmail());
 					
+				    MessageDigest md;
+					try {
+						md = MessageDigest.getInstance("MD5");
+						md.update(registerPageModel.getPassword().getBytes());
+						byte[] digest = md.digest();
+						StringBuffer sb = new StringBuffer();
+						for (byte b : digest) {
+							sb.append(String.format("%02x", b & 0xff));
+						}
+						memberModel.setPassword(sb.toString());
+					} catch (NoSuchAlgorithmException e) {
+						e.printStackTrace();
+					}
+					
+					try {
+						md = MessageDigest.getInstance("MD5");
+						String token = registerPageModel.getPassword() + registerPageModel.getAccount();
+						md.update(token.getBytes());
+						byte[] digest = md.digest();
+						StringBuffer sb = new StringBuffer();
+						for (byte b : digest) {
+							sb.append(String.format("%02x", b & 0xff));
+						}
+						memberModel.setApplicationToken(sb.toString());
+					} catch (NoSuchAlgorithmException e) {
+						e.printStackTrace();
+					}
+					
+					memberModel.setAdIncomeFee(0);
+					memberModel.setAdPaymentFee(0);
+					memberModel.setPrevilege(111);
+					memberModel.setBankAccount(Integer.valueOf(registerPageModel.getBankAccount()));
+					
+//					StringBuilder getBankTokenURL = new StringBuilder(bank_system).append("/getToken");
+//					BanktokenModel bankTokenPostModel = new BanktokenModel();
+//					bankTokenPostModel.setId(registerPageModel.getAccount());
+//					bankTokenPostModel.setToken("0BBFD968AD302F0D3ACC9655963F0622");
+//					String bankToken = restTemplate.postForObject(getBankTokenURL.toString(), bankTokenPostModel , String.class);
+//					memberModel.setBankToken(bankToken);
+					
+					restTemplate.postForObject(member_system, memberModel, MemberModel.class);
 				}else{
 					throw restClientException;
 				}
 			}
 		}catch (RestClientException e) {
-			feeErrors.add(new FieldError("FeeController", "error.http", resource.getString("error.http")+"<br>"+e.getMessage()));
+			feeErrors.add(new FieldError("RegisterController", "error.http", resource.getString("error.http")+"<br>"+e.getMessage()));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}catch(Exception e){
-			feeErrors.add(new FieldError("FeeController", "error.database", resource.getString("error.database")+"<br>"+e.getMessage()));
+			feeErrors.add(new FieldError("RegisterController", "error.database", resource.getString("error.database")+"<br>"+e.getMessage()));
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}
 
-		return new ModelAndView("redirect:../../index.jsp");
+		String REGISTER = (String) context.getBean("REGISTER_SUCCESS");
+		return new ModelAndView("redirect:../../" + REGISTER + ".jsp");
 	}
 }

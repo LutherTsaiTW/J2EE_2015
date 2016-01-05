@@ -75,7 +75,7 @@
         <font class="title">登入系統</font>
     </div>
     <div class="loginSection">
-        <form action="">
+        <form action="doLogin" method="POST">
             <br>
             <br> 帳號：
             <input class="inputForm" type="text" name="account" value="" required>

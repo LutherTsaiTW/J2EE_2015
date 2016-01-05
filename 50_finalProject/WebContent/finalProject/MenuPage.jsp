@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>註冊成功</title>
+<title>Login SUCCESS</title>
 </head>
 <body>
-
+Login SUCCESS
 </body>
 </html>

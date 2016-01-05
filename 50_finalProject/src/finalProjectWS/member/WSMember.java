@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,10 +62,15 @@ public class WSMember implements Member {
 		hibernateSession.close();
 	}
 
-	@Override
-	public void update(int id, MemberModel memberModel) throws Exception {
-		// TODO Auto-generated method stub
-
+	// http://localhost:8080/50_finalProject/spring/webservice/member/{id}
+	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/member/{id}
+	@RequestMapping(method = RequestMethod.PUT, value = "/{memberID}")
+	public @ResponseBody void update(@PathVariable("memberID") int memberID, @RequestBody MemberModel memberModel) throws Exception {
+		hibernateSession = hibernateSessionFactory.openSession();
+		Transaction tx= hibernateSession.beginTransaction();
+		hibernateSession.update(memberModel);
+		tx.commit();
+		hibernateSession.close();
 	}
 
 	@Override
@@ -78,7 +84,7 @@ public class WSMember implements Member {
 	@RequestMapping(value = "/findByName", method = RequestMethod.GET, produces = "application/json")
 	public MemberModel findByName(String name) throws Exception {
 		List<MemberModel> memberModelList;
-
+		System.out.print(name);
 		hibernateSession = hibernateSessionFactory.openSession();
 		hibernateCriteria = hibernateSession.createCriteria(MemberModel.class);
 		hibernateCriteria.add(Restrictions.eq("name", name));

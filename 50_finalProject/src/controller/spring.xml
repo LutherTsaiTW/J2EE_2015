@@ -8,8 +8,16 @@
 		<constructor-arg type="String" value="finalProject/RegisterPage"/>
     </bean>
     
+    <bean id="REGISTER_SUCCESS" class="java.lang.String">
+		<constructor-arg type="String" value="finalProject/RegisterSuccess"/>
+    </bean>
+    
     <bean id="LOGIN" class="java.lang.String">
 		<constructor-arg type="String" value="finalProject/LoginPage"/>
+    </bean>
+    
+    <bean id="LOGIN_SUCCESS" class="java.lang.String">
+		<constructor-arg type="String" value="finalProject/MenuPage"/>
     </bean>
     
     <bean id="ERROR" class="java.lang.String">
@@ -17,6 +25,10 @@
     </bean>
     
     <bean id="member_system" class="java.lang.String">
-		<constructor-arg type="String" value="http://localhost:8080/50_finalProject/spring/webservice/member" />
+		<constructor-arg type="String" value="http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/member" />
+	</bean>
+	
+	<bean id="bank_system" class="java.lang.String">
+		<constructor-arg type="String" value="http://ilab.csie.ntut.edu.tw:8080/final_53/spring/bank" />
 	</bean>
 </beans>
