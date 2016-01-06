@@ -15,5 +15,6 @@ public interface Member {
 	MemberModel findByName(String name) throws Exception;
 	MemberModel findByEmail(String email) throws Exception;
 	MemberModel findByAccount(String account) throws Exception;
+	MemberModel findBySession(String session) throws Exception;
 	public boolean authencate(@RequestBody MemberModel input) throws Exception;
 }

@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>50多媒體廣告</title>
-<style>
+<title>管理廣告</title>
+	<style>
     .pageHeader {
         width: 100%;
         height: 80px;
@@ -44,46 +44,37 @@
         font-size: 25px
     }
     
-    .menuButton {
-    	width: 120px;
-        height: 120px;
-        float: left;
-        text-align: center;
-        font-size: 20px;
-        margin:5px;
-    }
-    
-    .menuSection {
-    	width: 270px;
-        height: 270px;
-        float: center;
-        text-align: center;
-    }
-    
     </style>
 </head>
 <body>
 	<div class="pageHeader">
-        <img class="pageLogo" src="../../img/50_MULTI_b.png">
+        <a href="menu"><img class="pageLogo" src="../../img/50_MULTI_b.png"></a>
         <button class="pageHeaderButton" type="button" onclick="javascript:location.href='../../index.jsp'">登出系統</button>
         <div class="welcomeMessage">
-        	<font>$userName，歡迎來到50廣告公司</font>
+            <font>$userName，歡迎來到50廣告公司</font>
         </div>
     </div>
-    <br>
-    <p class="title">服務目錄</p>
-    <br>
+    <p class="title">管理廣告</p>
     <center>
-    <div class="menuSection">
-    	<div>
-     		<button class="menuButton" type="button" onclick="javascript:location.href='addAdvertise'">刊登廣告</button>
-        	<button class="menuButton" type="button" onclick="javascript:location.href='manageAdvertise'">管理廣告</button>
-    	</div>
-    	<div>
-        	<button class="menuButton" type="button" onclick="javascript:location.href='manageAccount'">我的帳戶</button>
-        	<button class="menuButton" type="button" onclick="javascript:location.href='managePayment'">收入/支出</button>
-        </div>
-    </div>
-    </center>
+			<table border="1px" cellspacing="0px" cellpadding="6px"
+				valign="middle">
+				<tr>
+					<th>廣告名稱</th>
+					<th>廣告內容</th>
+					<th>廣告圖片</th>
+					<th>開始日期</th>
+					<th>結束日期</th>
+				</tr>
+				#foreach( $adModel in $AdListModel )
+				<tr>
+					<td>$adModel.adTitle</td>
+					<td>$adModel.adDes</td>
+					<td><img src="$adModel.adImageLink" height="100" width="400"></td>
+					<td>$adModel.adStartDate</td>
+					<td>$adModel.adEndDate</td>
+				</tr> 
+				#end
+			</table>
+		</center>
 </body>
 </html>

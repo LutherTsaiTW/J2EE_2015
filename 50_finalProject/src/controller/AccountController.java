@@ -19,9 +19,10 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller("controller.finalProject.MenuController")
+@Controller("controller.finalProject.AccountController")
 @RequestMapping("/finalProject")
-public class MenuController {
+public class AccountController {
+	
 	@Autowired
     public HttpSession session;
 	
@@ -29,8 +30,8 @@ public class MenuController {
 	ResourceBundle resource = ResourceBundle.getBundle("resources.MessageDictionary");
 	ApplicationContext context = new ClassPathXmlApplicationContext("controller/spring.xml");
 	
-	@RequestMapping(value = "/menu", method = RequestMethod.GET)
-	public ModelAndView login() {
+	@RequestMapping(value = "/manageAccount", method = RequestMethod.GET)
+	public ModelAndView account() {
 		String ERROR = (String) context.getBean("ERROR");
 		List<FieldError> feeErrors = new ArrayList<FieldError>();
 		
@@ -48,8 +49,14 @@ public class MenuController {
 			return new ModelAndView(ERROR, "ErrorModel", feeErrors);
 		}
 		
-		String LOGIN_SUCCESS = (String) context.getBean("LOGIN_SUCCESS");
-		return new ModelAndView(LOGIN_SUCCESS, "userName", memberModel.getName());
+		String ACCOUNT = (String) context.getBean("ACCOUNT");
+		ModelAndView view = new ModelAndView(ACCOUNT);
+		view.addObject("userName", memberModel.getName());
+		view.addObject("name", memberModel.getName());
+		view.addObject("applicationToken", memberModel.getApplicationToken());
+		view.addObject("adIncomeFee", memberModel.getAdIncomeFee());
+		view.addObject("adPaymentFee", memberModel.getAdPaymentFee());
+		return view;
 	}
-	
+
 }

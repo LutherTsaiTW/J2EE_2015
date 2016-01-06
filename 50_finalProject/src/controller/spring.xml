@@ -20,12 +20,28 @@
 		<constructor-arg type="String" value="finalProject/MenuPage"/>
     </bean>
     
+    <bean id="ADD_AD" class="java.lang.String">
+		<constructor-arg type="String" value="finalProject/UploadAdPage"/>
+    </bean>
+    
+    <bean id="ADD_LIST" class="java.lang.String">
+		<constructor-arg type="String" value="finalProject/AdListPage"/>
+    </bean>
+    
+    <bean id="ACCOUNT" class="java.lang.String">
+		<constructor-arg type="String" value="finalProject/AccountPage"/>
+    </bean>
+    
     <bean id="ERROR" class="java.lang.String">
 		<constructor-arg type="String" value="finalProject/error"/>
     </bean>
     
     <bean id="member_system" class="java.lang.String">
 		<constructor-arg type="String" value="http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/member" />
+	</bean>
+	
+	<bean id="ad_system" class="java.lang.String">
+		<constructor-arg type="String" value="http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/ad" />
 	</bean>
 	
 	<bean id="bank_system" class="java.lang.String">

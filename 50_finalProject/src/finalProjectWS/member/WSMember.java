@@ -174,6 +174,28 @@ public class WSMember implements Member {
 		}
 		return memberModel;
 	}
+	
+	// http://localhost:8080/50_finalProject/spring/webservice/member/findBySession?session=XXXXXX
+	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/member/findBySession?session=XXXXXX
+	@RequestMapping(value = "/findBySession", method = RequestMethod.GET, produces = "application/json")
+	public MemberModel findBySession(String session) throws Exception {
+			List<MemberModel> memberModelList;
+
+			hibernateSession = hibernateSessionFactory.openSession();
+			hibernateCriteria = hibernateSession.createCriteria(MemberModel.class);
+			hibernateCriteria.add(Restrictions.eq("session", session));
+			memberModelList = hibernateCriteria.list();
+			Iterator iterator = memberModelList.iterator();
+
+			MemberModel memberModel;
+
+			if (iterator.hasNext()) {
+				memberModel = (MemberModel) iterator.next();
+			} else {
+				throw new NullAccountException();
+			}
+			return memberModel;
+		}
 
 	// http://localhost:8080/50_finalProject/spring/webservice/member/authencate
 	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/member/authencate

@@ -40,6 +40,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login() {
+		session.invalidate();
 		String LOGIN = (String) context.getBean("LOGIN");
 		return new ModelAndView(LOGIN);
 	}
@@ -97,7 +98,6 @@ public class LoginController {
 					e.printStackTrace();
 				}
 				memberModel.setSession(session.getAttribute("SESSIONID").toString());
-				System.out.println(memberModel.getSession() + "\n");
 				restTemplate.put(new StringBuilder(member_system).append("/").append(memberModel.getMemberID()).toString(), memberModel);
 			}
 		}catch (FailToLoginException e) {

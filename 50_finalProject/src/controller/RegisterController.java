@@ -103,12 +103,12 @@ public class RegisterController {
 					memberModel.setPrevilege(111);
 					memberModel.setBankAccount(Integer.valueOf(registerPageModel.getBankAccount()));
 					
-//					StringBuilder getBankTokenURL = new StringBuilder(bank_system).append("/getToken");
-//					BanktokenModel bankTokenPostModel = new BanktokenModel();
-//					bankTokenPostModel.setId(registerPageModel.getAccount());
-//					bankTokenPostModel.setToken("0BBFD968AD302F0D3ACC9655963F0622");
-//					String bankToken = restTemplate.postForObject(getBankTokenURL.toString(), bankTokenPostModel , String.class);
-//					memberModel.setBankToken(bankToken);
+					StringBuilder getBankTokenURL = new StringBuilder(bank_system).append("/getToken");
+					BanktokenModel bankTokenPostModel = new BanktokenModel();
+					bankTokenPostModel.setId(memberModel.getBankAccount());
+					bankTokenPostModel.setToken("0BBFD968AD302F0D3ACC9655963F0622");
+					String bankToken = restTemplate.postForObject(getBankTokenURL.toString(), bankTokenPostModel , String.class);
+					memberModel.setBankToken(bankToken);
 					
 					restTemplate.postForObject(member_system, memberModel, MemberModel.class);
 				}else{

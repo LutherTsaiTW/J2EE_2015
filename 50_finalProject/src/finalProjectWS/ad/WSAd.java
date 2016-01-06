@@ -4,16 +4,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import exceptions.NullAccountException;
 import model.AdModel;
+import model.MemberModel;
 
 @RestController("restfulWS.WSAd")
 @RequestMapping("/webservice/ad")
@@ -48,46 +52,79 @@ public class WSAd implements Ad {
 		}
 	}
 
-	@Override
-	public void create(AdModel adModel) throws Exception {
-		// TODO Auto-generated method stub
-
+	// http://localhost:8080/50_finalProject/spring/webservice/ad
+	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/ad
+	@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody void create(@RequestBody AdModel adModel)
+			throws Exception {
+		System.out.println("HERE!");
+		hibernateSession = hibernateSessionFactory.openSession();
+		Transaction tx = hibernateSession.beginTransaction();
+		hibernateSession.save(adModel);
+		tx.commit();
+		hibernateSession.close();
 	}
 
 	// http://localhost:8080/50_finalProject/spring/webservice/ad/getAD?token=XXXXXX
 	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/ad/getAD?token=XXXXXX
-	@RequestMapping(value = "/getAD", method = RequestMethod.GET, produces = "application/json")
-	public AdModel getAdByToken(String token) throws Exception {
+	@RequestMapping(value = "/getAD", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
+	public String getAdByToken(String token) throws Exception {
 		List<AdModel> memberModelList;
 
-		String currentDate = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
-		
+		String currentDate = new SimpleDateFormat("yyyyMMdd").format(Calendar
+				.getInstance().getTime());
+
 		hibernateSession = hibernateSessionFactory.openSession();
 		hibernateCriteria = hibernateSession.createCriteria(AdModel.class);
 		hibernateCriteria.add(Restrictions.ne("adOwnerToken", token));
-		hibernateCriteria.add(Restrictions.le("adStartDate", Integer.valueOf(currentDate))); 
-		hibernateCriteria.add(Restrictions.ge("adEndDate", Integer.valueOf(currentDate)));
-		
+		hibernateCriteria.add(Restrictions.le("adStartDate",
+				Integer.valueOf(currentDate)));
+		hibernateCriteria.add(Restrictions.ge("adEndDate",
+				Integer.valueOf(currentDate)));
+
 		memberModelList = hibernateCriteria.list();
 		Iterator iterator = memberModelList.iterator();
-
 		AdModel adModel;
 
-		if (iterator.hasNext()) {
-			adModel = (AdModel) iterator.next();
+		if (memberModelList.size() != 0) {
+			Random rand = new Random();
+			int n = rand.nextInt(memberModelList.size());
+			adModel = (AdModel) memberModelList.get(n);
 		} else {
-			throw new NullAccountException();
+			adModel = new AdModel();
 		}
-		return adModel;
+		String htmlString = "<a target=\"_blank\" href=\"" + adModel.getAdRef()
+				+ "\"><img src=\"" + adModel.getAdImageLink() + "\" title=\""
+				+ adModel.getAdTitle() + "\" alt=\"" + adModel.getAdDes()
+				+ "\" height=\"100\" width=\"400\"></a>";
+		System.out.println(htmlString);
+		return htmlString;
+	}
+
+	// http://localhost:8080/50_finalProject/spring/webservice/ad/getSelfAD?token=XXXXXX
+	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/ad/getSelfAD?token=XXXXXX
+	@RequestMapping(value = "/getSelfAD", method = RequestMethod.GET, produces = "application/json")
+	public List<AdModel> getSelfAdByToken(String token) throws Exception {
+		List<AdModel> memberModelList;
+		
+		hibernateSession = hibernateSessionFactory.openSession();
+		hibernateCriteria = hibernateSession.createCriteria(AdModel.class);
+		hibernateCriteria.add(Restrictions.eq("adOwnerToken", token));
+
+		memberModelList = hibernateCriteria.list();
+
+		return memberModelList;
 	}
 
 	@ExceptionHandler(NullAccountException.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	public void handleNullAccountException(NullAccountException e) {}
-	
+	public void handleNullAccountException(NullAccountException e) {
+	}
+
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	public void handleException(Exception e) {}
+	public void handleException(Exception e) {
+	}
 }
