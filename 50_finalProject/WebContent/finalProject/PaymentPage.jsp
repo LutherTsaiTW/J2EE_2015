@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>50多媒體廣告</title>
+<title>收入/支出</title>
 <style>
     .pageHeader {
         width: 100%;
@@ -59,33 +59,50 @@
         float: center;
         text-align: center;
     }
-    
     </style>
+    <script type="text/javascript">
+            function IncomeSuccess() {
+            	alert("轉帳成功");
+            }
+            
+            function PaySuccess() {
+            	alert("付款成功，感謝您支持50廣告")
+             }
+    </script>
 </head>
 <body>
-	<div class="pageHeader">
-        <img class="pageLogo" src="../../img/50_MULTI_b.png">
+	<script type="text/javascript">
+		$callFunction
+    </script>
+ 	<div class="pageHeader">
+        <a href="menu"><img class="pageLogo" src="../../img/50_MULTI_b.png"></a>
         <button class="pageHeaderButton" type="button" onclick="javascript:location.href='../../index.jsp'">登出系統</button>
         <div class="welcomeMessage">
-        	<font>$userName，歡迎來到50廣告公司</font>
+            <font>$userName，歡迎來到50廣告公司</font>
         </div>
     </div>
-    <br>
-    <p class="title">服務目錄</p>
+    <p class="title">收取/支付帳款</p>
     <br>
     <center>
     <div class="menuSection">
     	<div>
-     		<button class="menuButton" type="button" onclick="javascript:location.href='addAdvertise'">刊登廣告</button>
-        	<button class="menuButton" type="button" onclick="javascript:location.href='manageAdvertise'">廣告列表</button>
-    	</div>
-    	<div>
-        	<button class="menuButton" type="button" onclick="javascript:location.href='manageAccount'">我的帳戶</button>
-        	<button class="menuButton" type="button" onclick="javascript:location.href='managePayment'">收入/支出</button>
+            <table width='230px' style="table-layout:fixed" border="1px" cellspacing="0px" cellpadding="6px">
+                    <td width='115px'>目前收入</td>
+                    <td width='115px'>$adIncomeFee</td>
+                </tr>
+                <tr>
+                    <td>目前欠款</td>
+                    <td>$adPaymentFee</td>
+                </tr>
+            </table>
+            <br>
         </div>
-    </div>
-    <div>
-		$adImport
+    	<div>
+    		<form id="formIncome" action="doPayIncomeFee" method="POST"></form>
+    		<form id="formPayment" action="doPayFee" method="POST"></form>
+     		<button class="menuButton" type="submit" form="formIncome" value="Submit">我要收款</button>
+        	<button class="menuButton" type="submit" form="formPayment" value="Submit">我要付款</button>
+    	</div>
     </div>
     </center>
 </body>

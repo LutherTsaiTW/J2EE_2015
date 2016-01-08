@@ -63,6 +63,14 @@
         height: 30px;
         text-align: center;
     }
+    
+    .adSection {
+        width: 400px;
+        height: 100px;
+        margin:0px auto ;
+        margin-top:200px ;
+        float: center;
+    }
     </style>
 </head>
 
@@ -88,6 +96,9 @@
                 <input class="loginButton" type="submit" name="submit" value="登入">
             </div>
         </form>
+    </div>
+    <div class="adSection">
+    		$adImport
     </div>
 </body>
 

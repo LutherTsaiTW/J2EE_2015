@@ -11,10 +11,10 @@ public interface Member {
 	void create(MemberModel memberModel) throws Exception;
 	void update(int id, MemberModel memberModel) throws Exception;
 	void active(String applicationToken) throws Exception;
-	MemberModel find(int id) throws Exception;
 	MemberModel findByName(String name) throws Exception;
 	MemberModel findByEmail(String email) throws Exception;
 	MemberModel findByAccount(String account) throws Exception;
 	MemberModel findBySession(String session) throws Exception;
-	public boolean authencate(@RequestBody MemberModel input) throws Exception;
+	MemberModel findByToken(String token) throws Exception;
+	boolean authencate(@RequestBody MemberModel input) throws Exception;
 }

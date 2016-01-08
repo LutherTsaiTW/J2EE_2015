@@ -42,7 +42,10 @@ public class LoginController {
 	public ModelAndView login() {
 		session.invalidate();
 		String LOGIN = (String) context.getBean("LOGIN");
-		return new ModelAndView(LOGIN);
+		String ad_system = (String) context.getBean("ad_system");
+		StringBuilder getURL = new StringBuilder(ad_system).append("/getAD?token=6ac8788402456e6bb9867e511c80b290");
+		String html = restTemplate.getForObject(getURL.toString(), String.class);
+		return new ModelAndView(LOGIN, "adImport", html);
 	}
 	
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
@@ -56,7 +59,6 @@ public class LoginController {
 		}
 		
 		String member_system = (String) context.getBean("member_system");
-		String bank_system = (String) context.getBean("bank_system");
 		
 		MemberModel memberModel = new MemberModel();
 		memberModel.setAccount(loginPageModel.getAccount());

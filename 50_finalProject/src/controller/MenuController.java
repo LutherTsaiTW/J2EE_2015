@@ -36,9 +36,12 @@ public class MenuController {
 		
 		String member_system = (String) context.getBean("member_system");
 		MemberModel memberModel = new MemberModel();
+		String ad_system = (String) context.getBean("ad_system");
+		StringBuilder getURL = new StringBuilder(ad_system).append("/getAD?token=6ac8788402456e6bb9867e511c80b290");
+		String html = restTemplate.getForObject(getURL.toString(), String.class);
 		
 		try {
-			StringBuilder getURL = new StringBuilder(member_system).append("/findBySession?session=").append(session.getAttribute("SESSIONID"));
+			getURL = new StringBuilder(member_system).append("/findBySession?session=").append(session.getAttribute("SESSIONID"));
 			memberModel = restTemplate.getForObject(getURL.toString(), MemberModel.class);
 		} catch (RestClientException e) {
 			feeErrors.add(new FieldError("LoginController", "error.http", resource.getString("error.http")+"<br>"+e.getMessage()));
@@ -49,7 +52,9 @@ public class MenuController {
 		}
 		
 		String LOGIN_SUCCESS = (String) context.getBean("LOGIN_SUCCESS");
-		return new ModelAndView(LOGIN_SUCCESS, "userName", memberModel.getName());
+		ModelAndView view = new ModelAndView(LOGIN_SUCCESS, "userName", memberModel.getName());
+		view.addObject("adImport", html);
+		return view;
 	}
 	
 }

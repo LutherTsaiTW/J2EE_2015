@@ -32,6 +32,14 @@
 		<constructor-arg type="String" value="finalProject/AccountPage"/>
     </bean>
     
+    <bean id="PAYMENT" class="java.lang.String">
+		<constructor-arg type="String" value="finalProject/PaymentPage"/>
+    </bean>
+    
+    <bean id="PAYMENT_SUCCESS" class="java.lang.String">
+		<constructor-arg type="String" value="finalProject/doPaySuccess"/>
+    </bean>
+    
     <bean id="ERROR" class="java.lang.String">
 		<constructor-arg type="String" value="finalProject/error"/>
     </bean>

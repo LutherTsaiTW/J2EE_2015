@@ -16,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import exceptions.NullAccountException;
 import model.AdModel;
-import model.MemberModel;
 
 @RestController("restfulWS.WSAd")
 @RequestMapping("/webservice/ad")
@@ -57,12 +57,46 @@ public class WSAd implements Ad {
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody void create(@RequestBody AdModel adModel)
 			throws Exception {
-		System.out.println("HERE!");
 		hibernateSession = hibernateSessionFactory.openSession();
 		Transaction tx = hibernateSession.beginTransaction();
 		hibernateSession.save(adModel);
 		tx.commit();
 		hibernateSession.close();
+	}
+
+	// http://localhost:8080/50_finalProject/spring/webservice/ad/{id}
+	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/ad/{id}
+	@RequestMapping(method = RequestMethod.PUT, value = "/{AdID}")
+	public @ResponseBody void update(@PathVariable("AdID") int AdID,
+			@RequestBody AdModel adModel) throws Exception {
+		hibernateSession = hibernateSessionFactory.openSession();
+		Transaction tx = hibernateSession.beginTransaction();
+		hibernateSession.update(adModel);
+		tx.commit();
+		hibernateSession.close();
+	}
+
+	// http://localhost:8080/50_finalProject/spring/webservice/ad/getAdByID?adId=XXXXX
+	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/ad/getAdByID?adId=XXXXX
+	@RequestMapping(value = "/getAdByID", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	public AdModel getAdByID(String adId) throws Exception {
+		List<AdModel> adModelList;
+
+		hibernateSession = hibernateSessionFactory.openSession();
+		hibernateCriteria = hibernateSession.createCriteria(AdModel.class);
+		hibernateCriteria.add(Restrictions.eq("AdID", Integer.valueOf(adId)));
+
+		adModelList = hibernateCriteria.list();
+		Iterator iterator = adModelList.iterator();
+		AdModel adModel;
+
+		if (iterator.hasNext()) {
+			adModel = (AdModel) iterator.next();
+		} else {
+			throw new NullAccountException();
+		}
+
+		return adModel;
 	}
 
 	// http://localhost:8080/50_finalProject/spring/webservice/ad/getAD?token=XXXXXX
@@ -93,7 +127,9 @@ public class WSAd implements Ad {
 		} else {
 			adModel = new AdModel();
 		}
-		String htmlString = "<a target=\"_blank\" href=\"" + adModel.getAdRef()
+		String linkString = "http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/finalProject/doClick?token="
+				+ token + "&adId=" + adModel.getAdID();
+		String htmlString = "<a target=\"_blank\" href=\"" + linkString
 				+ "\"><img src=\"" + adModel.getAdImageLink() + "\" title=\""
 				+ adModel.getAdTitle() + "\" alt=\"" + adModel.getAdDes()
 				+ "\" height=\"100\" width=\"400\"></a>";
@@ -105,15 +141,15 @@ public class WSAd implements Ad {
 	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/ad/getSelfAD?token=XXXXXX
 	@RequestMapping(value = "/getSelfAD", method = RequestMethod.GET, produces = "application/json")
 	public List<AdModel> getSelfAdByToken(String token) throws Exception {
-		List<AdModel> memberModelList;
-		
+		List<AdModel> adModelList;
+
 		hibernateSession = hibernateSessionFactory.openSession();
 		hibernateCriteria = hibernateSession.createCriteria(AdModel.class);
 		hibernateCriteria.add(Restrictions.eq("adOwnerToken", token));
 
-		memberModelList = hibernateCriteria.list();
+		adModelList = hibernateCriteria.list();
 
-		return memberModelList;
+		return adModelList;
 	}
 
 	@ExceptionHandler(NullAccountException.class)

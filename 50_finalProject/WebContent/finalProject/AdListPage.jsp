@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>管理廣告</title>
+<title>廣告列表</title>
 	<style>
     .pageHeader {
         width: 100%;
@@ -54,7 +54,7 @@
             <font>$userName，歡迎來到50廣告公司</font>
         </div>
     </div>
-    <p class="title">管理廣告</p>
+    <p class="title">廣告列表</p>
     <center>
 			<table border="1px" cellspacing="0px" cellpadding="6px"
 				valign="middle">
@@ -64,6 +64,7 @@
 					<th>廣告圖片</th>
 					<th>開始日期</th>
 					<th>結束日期</th>
+					<th>點擊次數</th>
 				</tr>
 				#foreach( $adModel in $AdListModel )
 				<tr>
@@ -72,6 +73,7 @@
 					<td><img src="$adModel.adImageLink" height="100" width="400"></td>
 					<td>$adModel.adStartDate</td>
 					<td>$adModel.adEndDate</td>
+					<td>$adModel.adClick</td>
 				</tr> 
 				#end
 			</table>

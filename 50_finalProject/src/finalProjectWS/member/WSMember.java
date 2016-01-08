@@ -65,18 +65,13 @@ public class WSMember implements Member {
 	// http://localhost:8080/50_finalProject/spring/webservice/member/{id}
 	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/member/{id}
 	@RequestMapping(method = RequestMethod.PUT, value = "/{memberID}")
-	public @ResponseBody void update(@PathVariable("memberID") int memberID, @RequestBody MemberModel memberModel) throws Exception {
+	public @ResponseBody void update(@PathVariable("memberID") int memberID,
+			@RequestBody MemberModel memberModel) throws Exception {
 		hibernateSession = hibernateSessionFactory.openSession();
-		Transaction tx= hibernateSession.beginTransaction();
+		Transaction tx = hibernateSession.beginTransaction();
 		hibernateSession.update(memberModel);
 		tx.commit();
 		hibernateSession.close();
-	}
-
-	@Override
-	public MemberModel find(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	// http://localhost:8080/50_finalProject/spring/webservice/member/findByName?name=XXXXXX
@@ -174,28 +169,50 @@ public class WSMember implements Member {
 		}
 		return memberModel;
 	}
-	
+
+	// http://localhost:8080/50_finalProject/spring/webservice/member/findByToken?token=XXXXXX
+	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/member/findByToken?token=XXXXXX
+	@RequestMapping(value = "/findByToken", method = RequestMethod.GET, produces = "application/json")
+	public MemberModel findByToken(String token) throws Exception {
+		List<MemberModel> memberModelList;
+
+		hibernateSession = hibernateSessionFactory.openSession();
+		hibernateCriteria = hibernateSession.createCriteria(MemberModel.class);
+		hibernateCriteria.add(Restrictions.eq("applicationToken", token));
+		memberModelList = hibernateCriteria.list();
+		Iterator iterator = memberModelList.iterator();
+
+		MemberModel memberModel;
+
+		if (iterator.hasNext()) {
+			memberModel = (MemberModel) iterator.next();
+		} else {
+			throw new NullAccountException();
+		}
+		return memberModel;
+	}
+
 	// http://localhost:8080/50_finalProject/spring/webservice/member/findBySession?session=XXXXXX
 	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/member/findBySession?session=XXXXXX
 	@RequestMapping(value = "/findBySession", method = RequestMethod.GET, produces = "application/json")
 	public MemberModel findBySession(String session) throws Exception {
-			List<MemberModel> memberModelList;
+		List<MemberModel> memberModelList;
 
-			hibernateSession = hibernateSessionFactory.openSession();
-			hibernateCriteria = hibernateSession.createCriteria(MemberModel.class);
-			hibernateCriteria.add(Restrictions.eq("session", session));
-			memberModelList = hibernateCriteria.list();
-			Iterator iterator = memberModelList.iterator();
+		hibernateSession = hibernateSessionFactory.openSession();
+		hibernateCriteria = hibernateSession.createCriteria(MemberModel.class);
+		hibernateCriteria.add(Restrictions.eq("session", session));
+		memberModelList = hibernateCriteria.list();
+		Iterator iterator = memberModelList.iterator();
 
-			MemberModel memberModel;
+		MemberModel memberModel;
 
-			if (iterator.hasNext()) {
-				memberModel = (MemberModel) iterator.next();
-			} else {
-				throw new NullAccountException();
-			}
-			return memberModel;
+		if (iterator.hasNext()) {
+			memberModel = (MemberModel) iterator.next();
+		} else {
+			throw new NullAccountException();
 		}
+		return memberModel;
+	}
 
 	// http://localhost:8080/50_finalProject/spring/webservice/member/authencate
 	// http://ilab.csie.ntut.edu.tw:8080/50_finalProject/spring/webservice/member/authencate
@@ -224,15 +241,17 @@ public class WSMember implements Member {
 			return false;
 		}
 	}
-	
+
 	@ExceptionHandler(NullAccountException.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
-	public void handleNullAccountException(NullAccountException e) {}
-	
+	public void handleNullAccountException(NullAccountException e) {
+	}
+
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	public void handleException(Exception e) {}
+	public void handleException(Exception e) {
+	}
 
 }

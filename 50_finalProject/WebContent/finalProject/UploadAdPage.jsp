@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>刊登廣告</title>
@@ -118,8 +117,21 @@
         border-radius: 5px;
         width: 300px;
     }
+    
+    .loginButton {
+        width: 80px;
+        height: 100%;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+    
+    .loginButtonSection {
+        float: center;
+        width: 100%;
+        height: 30px;
+        text-align: center;
+    }
     </style>
-</head>
 <script>
 function getExpectDays() {
     var startTimeObj = document.getElementById("startTime");
@@ -141,7 +153,7 @@ function getExpectDays() {
     }
 }
 </script>
-
+</head>
 <body>
     <div class="pageHeader">
         <a href="menu"><img class="pageLogo" src="../../img/50_MULTI_b.png"></a>
@@ -203,7 +215,10 @@ function getExpectDays() {
                 <br> 廣告文字:
                 <textarea class="adDescription" name="adDes" form="createAd"></textarea>
                 <br>
-                <input type="submit" value="送出申請" name="submit">
+                <br>
+                <div class="loginButtonSection">
+                	<input class="loginButton" type="submit" name="submit" value="送出申請">
+            	</div>
             </form>
         </div>
     </div>
