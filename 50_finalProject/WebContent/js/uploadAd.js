@@ -66,7 +66,3 @@ function uploadImage() {
 	  }
 	} 
 }
-
-function doUploadAd() {
-	
-}

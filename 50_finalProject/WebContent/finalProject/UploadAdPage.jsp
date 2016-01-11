@@ -133,6 +133,16 @@
     }
     </style>
 <script>
+$(document).ready(function(){
+    $("#createAd").submit(function() {
+		var link = $( "#ImageRef" ).val();
+        if(!link) {
+        	alert("請確認圖片已上傳!!");
+        	return false;
+        }
+		});
+}); 
+
 function getExpectDays() {
     var startTimeObj = document.getElementById("startTime");
     var startTime = startTimeObj.value;
